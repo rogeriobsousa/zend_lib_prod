@@ -72,7 +72,6 @@ class Base_GeoTools_ShpParser {
     $bounding_box["ymin"] = $this->loadData("d");
     $bounding_box["xmax"] = $this->loadData("d");
     $bounding_box["ymax"] = $this->loadData("d");
-    
     $this->headerInfo = array(
       'length' => $length,
       'shapeType' => array(
@@ -238,19 +237,19 @@ class Base_GeoTools_ShpParser {
     }
     if ($numParts == 1) {
       for ($i = 0; $i < $numPoints; $i++) {
-        $geometries[] = sprintf('%f %f', $points[$i]['x'], $points[$i]['y']);
+        //$geometries[] = sprintf('%f %f', $points[$i]['x'], $points[$i]['y']);
+        $geometries[] = sprintf('%s %s', $points[$i]['x'], $points[$i]['y']);
       }
     }
     else {
       for ($i = 0; $i < $numParts; $i++) {
         $my_points = array();
         for ($j = $parts[$i]; $j < $parts[$i + 1]; $j++) {
-          $my_points[] = sprintf('%f %f', $points[$j]['x'], $points[$j]['y']);
+          $my_points[] = sprintf('%s %s', $points[$j]['x'], $points[$j]['y']);
         }
         $geometries[] = '(' . implode(', ', $my_points) . ')';
       }
     }
-    
     return array(
       'numParts' => $numParts,
       'geometries' => $geometries,
@@ -273,7 +272,7 @@ class Base_GeoTools_ShpParser {
     
     for ($i = 0; $i < $this->shpData['numGeometries']; $i++) {
       $point = $this->loadPoint();
-      $geometries[] = sprintf('(%f %f)', $point['x'], $point['y']);
+      $geometries[] = sprintf('(%s %s)', $point['x'], $point['y']);
     }
     
     $return['wkt'] = 'MULTIPOINT(' . implode(', ', $geometries) . ')';
@@ -282,7 +281,6 @@ class Base_GeoTools_ShpParser {
   
   private function loadPointRecord() {
     $point = $this->loadPoint();
-    
     $return = array(
       'bbox' => array(
         'xmin' => $point['x'],

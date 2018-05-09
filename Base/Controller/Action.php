@@ -352,7 +352,7 @@ class Base_Controller_Action extends Zend_Controller_Action
 		        $uploadOk = 0;
 		    }
 		}
-
+		
 		
 		if(isset($array['tx_foto_anterior']))
 		if (file_exists($array['tx_foto_anterior'])) {
@@ -366,8 +366,6 @@ class Base_Controller_Action extends Zend_Controller_Action
 		    echo "Sorry, your file is too large.";
 		    $uploadOk = 0;
 		}
-
-		
 		
 		if($fileType != "rar") {
 		    //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";

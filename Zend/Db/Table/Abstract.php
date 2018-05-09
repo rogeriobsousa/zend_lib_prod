@@ -1022,13 +1022,15 @@ abstract class Zend_Db_Table_Abstract
         $primary = (array) $this->_primary;
         $pkIdentity = $primary[(int)$this->_identity];
 
+        
         /**
          * If this table uses a database sequence object and the data does not
          * specify a value, then get the next ID from the sequence and add it
          * to the row.  We assume that only the first column in a compound
          * primary key takes a value from a sequence.
          */
-        if (is_string($this->_sequence) && !isset($data[$pkIdentity])) {
+        
+        if (is_string($this->_sequence) && !isset($data[$pkIdentity])){  	
             $data[$pkIdentity] = $this->_db->nextSequenceId($this->_sequence);
         }
 
@@ -1036,10 +1038,10 @@ abstract class Zend_Db_Table_Abstract
          * If the primary key can be generated automatically, and no value was
          * specified in the user-supplied data, then omit it from the tuple.
          */
+        
         if (array_key_exists($pkIdentity, $data) && $data[$pkIdentity] === null) {
             unset($data[$pkIdentity]);
         }
-
         /**
          * INSERT the new row.
          */

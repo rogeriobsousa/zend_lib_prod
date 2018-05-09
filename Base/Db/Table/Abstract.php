@@ -260,6 +260,16 @@ class Base_Db_Table_Abstract extends Zend_Db_Table_Abstract
 	 * @param array $keys
 	 * @return boolean
 	 */
+	
+	public function getCols(){
+		$arrReturn = array();
+		foreach($this->_getCols() as $value){
+			$arrReturn[$value] = null;
+		}
+		return $arrReturn;
+	}
+	
+	
 	public function salvar(array $arrDados, $unsetEmpty = false, array $keys = null){
 		$arr = $this->prepareRequest($arrDados, $unsetEmpty, 'insert', $keys);
 		if($lastId = $this->insert($arr['params'])){
