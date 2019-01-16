@@ -130,7 +130,6 @@ class Base_Db_Table_Abstract extends Zend_Db_Table_Abstract
 		foreach($this->_cols as $key=>$value){
 			$arrCols[$value]='';
 		}
-		
 		$arrCombine = array_intersect_key($arrDados, $arrCols);
 		
 		

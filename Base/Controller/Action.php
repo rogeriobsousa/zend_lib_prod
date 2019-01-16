@@ -12,14 +12,8 @@ class Base_Controller_Action extends Zend_Controller_Action
 	{
 		parent::init();
 
-                
 		$namespaceApp = new Zend_Session_Namespace('App'); 
 
-		if(!isset($_SESSION['App']['logado'])){
-			//$this->_request->setParam('act','login');
-		};
-		
-		
 		$this->view->addHelperPath('Base/View/Helper', 'Base_View_Helper');
 		$this->_helper->addPath('Base/Controller/Action/Helper', 'Base_Controller_Action_Helper');
 		
@@ -42,6 +36,9 @@ class Base_Controller_Action extends Zend_Controller_Action
                 
                 
 	}
+	
+	
+	
 	
 	public function setPagination($arrDados){
 		$this->setPage(isset($arrDados['page']) ? $arrDados['page'] : null);
@@ -515,6 +512,13 @@ class Base_Controller_Action extends Zend_Controller_Action
 	    $str = preg_replace('/[^a-z0-9]/i', '_', $str);
 	    $str = preg_replace('/_+/', '_', $str); // ideia do Bacco :)
 	    return $str;
+	}
+	
+	public function getNomeSession(){
+		$config = new Zend_Config_Ini('default/config/application.ini',
+                              'homolog');
+		$options = $config->sessao->toArray();
+		return $options->nome;
 	}
 	
 	
